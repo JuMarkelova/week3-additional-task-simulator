@@ -55,11 +55,10 @@ public class Events {
         }
     }
 
-    public static boolean isAlive(Octopus octopus) {
+    public static void isAlive(Octopus octopus) {
         if (octopus.getHealthPoint() == 0) {
             octopus.setIsAlive(false);
-            return false;
-        } else return true;
+        }
     }
 
     public static int createRandomNumber() {
