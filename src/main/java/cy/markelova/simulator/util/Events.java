@@ -26,6 +26,27 @@ public class Events {
                 Чтобы остаться в живых нужно спрятаться, это отнимает много энергии.
                 """;
         System.out.println(message);
+
+        int randomNumber = createRandomNumber();
+        if (randomNumber <= 50) {
+            hidSuccessfully(octopus);
+        } else hidUnsuccessfully(octopus);
+    }
+
+    public static void hidSuccessfully(Octopus octopus) {
+        octopus.setEnergy(highEnergy(octopus, 5));
+        String message = "Осьминогу удалось укрыться. Она чувствует облегчение.";
+        System.out.println(message);
+    }
+
+    public static void hidUnsuccessfully(Octopus octopus) {
+        octopus.setEnergy(lowEnergy(octopus, 10));
+        octopus.setHealthPoints(lowHealthPoints(octopus, 25));
+        String message = """
+                К сожалению, осьминогу не удалось спрятаться.
+                Акула нашла ее по запаху и откусила щупальце.
+                """;
+        System.out.println(message);
     }
 
     public static int lowEnergy(Octopus octopus, int energy) {
@@ -58,11 +79,19 @@ public class Events {
     public static void isAlive(Octopus octopus) {
         if (octopus.getHealthPoint() == 0) {
             octopus.setIsAlive(false);
+            dieOctopus();
         }
     }
 
     public static int createRandomNumber() {
         return (int) (Math.random() * 100);
+    }
+
+    public static void dieOctopus() {
+        String message = """
+                Прожив свою короткую, но насыщенную жизнь осьминог умерла.
+                """;
+        System.out.println(message);
     }
 
     public static void runLife(Octopus octopus) {
@@ -75,9 +104,9 @@ public class Events {
                 thereAreOctopusEnemyAround(octopus);
             }
             hasEnergy(octopus);
-            System.out.println("до проверки энергии " + octopus.getHealthPoint() + " " + octopus.getEnergy());
+//            System.out.println("до проверки энергии " + octopus.getHealthPoint() + " " + octopus.getEnergy());
             isAlive(octopus);
-            System.out.println("до проверки жизни " + octopus.getHealthPoint() + " " + octopus.getEnergy());
+//            System.out.println("до проверки жизни " + octopus.getHealthPoint() + " " + octopus.getEnergy());
         }
     }
 }
