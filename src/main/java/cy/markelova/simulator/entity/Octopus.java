@@ -4,6 +4,7 @@ public class Octopus {
 
     private int healthPoints = 100; // когда = 0, то умирает
     private int energy = 100; // когда = 0, то тратится здоровье
+    private boolean isAlive = true;
 
     public int getHealthPoint() {
         return this.healthPoints;
@@ -19,5 +20,13 @@ public class Octopus {
 
     public void setEnergy(int energy) {
         this.energy = energy;
+    }
+
+    public void setIsAlive(boolean isAlive) {
+        this.isAlive = isAlive;
+    }
+
+    public boolean getIsAlive() {
+        return this.isAlive;
     }
 }
