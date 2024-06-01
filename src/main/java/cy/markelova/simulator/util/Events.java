@@ -16,12 +16,12 @@ public class Events {
             if (randomNumber > 69 && randomNumber <= 80 && octopus.getIsInjured()) growTentacles(octopus);
             if (randomNumber > 80 && randomNumber <= 90) attackOctopusByHuman(octopus);
             if (randomNumber > 90 && randomNumber <= 100) eatLobster(octopus);
-            if (octopus.getEnergy() == 0) octopus.setHealthPoints(lowHealthPoints(octopus, 20));
+            if (octopus.getEnergy() == 0) octopus.setHealthPoints(decreaseHealthPoints(octopus, 20));
             if (octopus.getHealthPoint() == 0) {
                 octopus.setIsAlive(false);
                 printLastMessage();
             }
-            System.out.println("Текущее состояние осьминога. Здоровье: " + octopus.getHealthPoint() + " и " + "энергия: " + octopus.getEnergy());
+            System.out.println("Current state of the octopus. Health: " + octopus.getHealthPoint() + " and " + "energy: " + octopus.getEnergy());
             try {
                 //noinspection BusyWait
                 Thread.sleep(2000);
@@ -33,22 +33,22 @@ public class Events {
 
     private static void giveBirthOctopus() {
         String introduction = """
-                Сегодня родилась маленькая особь осьминога!
-                Это самка. Жизнь осьминога трудна, опасна.
-                И составляет не более двух лет.
+                A baby octopus was born today.
+                It's a female. The life of an octopus is difficult and dangerous.
+                And it lasts no more than two years.
                 """;
         System.out.println(introduction);
     }
 
     private static void eatFish(Octopus octopus) {
-        octopus.setEnergy(upEnergy(octopus, 5));
-        String message = "Осьминог поела рыбок! Силы восстановлены.";
+        octopus.setEnergy(increaseEnergy(octopus, 5));
+        String message = "The octopus ate some fish! Her energy is restored.";
         System.out.println(message);
     }
 
     private static void surroundOctopusBySparks(Octopus octopus) {
-        octopus.setEnergy(lowEnergy(octopus, 40));
-        String message = "Вокруг плавают усатые кошачьи акулы. Чтобы выжить нужно спрятаться, ушло столько сил.";
+        octopus.setEnergy(decreaseEnergy(octopus, 40));
+        String message = "Cat sharks are swimming around. To survive, she needs to hide, which took so much energy.";
         System.out.println(message);
         int randomNumber = createRandomNumber();
         if (randomNumber <= 50) {
@@ -57,68 +57,68 @@ public class Events {
     }
 
     private static void swim(Octopus octopus) {
-        octopus.setEnergy(lowEnergy(octopus, 8));
-        String message = "Какой отличный день, вокруг никаких опасностей, можно вдоволь поплавать!";
+        octopus.setEnergy(decreaseEnergy(octopus, 8));
+        String message = "What a great day, there are no dangers around, she can swim freely.";
         System.out.println(message);
     }
 
     private static void sleep(Octopus octopus) {
-        octopus.setEnergy(upEnergy(octopus, 10));
-        octopus.setHealthPoints(upHealthPoints(octopus, 10));
-        String message = "Удалось спокойно поспать и набраться сил.";
+        octopus.setEnergy(increaseEnergy(octopus, 10));
+        octopus.setHealthPoints(increaseHealthPoints(octopus, 10));
+        String message = "She was able to sleep well and recharge.";
         System.out.println(message);
     }
 
     private static void hidSuccessfully(Octopus octopus) {
-        octopus.setEnergy(upEnergy(octopus, 5));
-        String message = "Осьминогу удалось укрыться. Она чувствует облегчение.";
+        octopus.setEnergy(increaseEnergy(octopus, 5));
+        String message = "The octopus successfully hid. She feels relieved.";
         System.out.println(message);
     }
 
     private static void hidUnsuccessfully(Octopus octopus) {
-        octopus.setEnergy(lowEnergy(octopus, 10));
-        octopus.setHealthPoints(lowHealthPoints(octopus, 25));
+        octopus.setEnergy(decreaseEnergy(octopus, 10));
+        octopus.setHealthPoints(decreaseHealthPoints(octopus, 25));
         octopus.setIsInjured(true);
-        String message = "К сожалению, осьминогу не удалось спрятаться. Акула нашла ее и откусила щупальце.";
+        String message = "The octopus couldn't hide. The shark found her and bit off one of her tentacles.";
         System.out.println(message);
     }
 
     private static void attackOctopusByHuman(Octopus octopus) {
-        octopus.setHealthPoints(lowHealthPoints(octopus, 25));
-        octopus.setEnergy(lowEnergy(octopus, 10));
-        String message = "О нет! Человек. Он не так страшен как акула, но в случае неудачи осьминога зажарят на гриле.";
+        octopus.setHealthPoints(decreaseHealthPoints(octopus, 25));
+        octopus.setEnergy(decreaseEnergy(octopus, 10));
+        String message = "No! A human. If the octopus fails, she'll end up grilled.";
         System.out.println(message);
     }
 
     private static void eatLobster(Octopus octopus) {
-        octopus.setEnergy(upEnergy(octopus, 15));
-        String message = "Повезло, на обед попался омар, что является большой редкостью!";
+        octopus.setEnergy(increaseEnergy(octopus, 15));
+        String message = "Good fortune! She caught a lobster for lunch, which is a rare find!";
         System.out.println(message);
     }
 
     private static void growTentacles(Octopus octopus) {
-        octopus.setHealthPoints(upHealthPoints(octopus, 5));
+        octopus.setHealthPoints(increaseHealthPoints(octopus, 5));
         octopus.setIsInjured(false);
-        String message = "Начали отрастать новые щупальца!";
+        String message = "New tentacles began to grow";
         System.out.println(message);
     }
 
-    private static int lowEnergy(Octopus octopus, int energy) {
+    private static int decreaseEnergy(Octopus octopus, int energy) {
         int newEnergy = octopus.getEnergy() - energy;
         return newEnergy <= 0 ? 0 : newEnergy;
     }
 
-    private static int upEnergy(Octopus octopus, int energy) {
+    private static int increaseEnergy(Octopus octopus, int energy) {
         int newEnergy = octopus.getEnergy() + energy;
         return newEnergy > 100 ? 100 : newEnergy;
     }
 
-    private static int lowHealthPoints(Octopus octopus, int points) {
+    private static int decreaseHealthPoints(Octopus octopus, int points) {
         int newHealthPoints = octopus.getHealthPoint() - points;
         return newHealthPoints <= 0 ? 0 : newHealthPoints;
     }
 
-    private static int upHealthPoints(Octopus octopus, int points) {
+    private static int increaseHealthPoints(Octopus octopus, int points) {
         int newHealthPoints = octopus.getHealthPoint() + points;
         return newHealthPoints > 100 ? 100 : newHealthPoints;
     }
@@ -128,7 +128,7 @@ public class Events {
     }
 
     private static void printLastMessage() {
-        String message = "Прожив свою короткую, но насыщенную жизнь осьминог умерла.";
+        String message = "After living her short but eventful life, the octopus passed away.";
         System.out.println(message);
     }
 }

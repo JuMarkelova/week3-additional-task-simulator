@@ -2,8 +2,8 @@ package cy.markelova.simulator.entity;
 
 public class Octopus {
 
-    private int healthPoints = 100; // когда = 0, то умирает
-    private int energy = 100; // когда = 0, то тратится здоровье
+    private int healthPoints = 100; // it dies when healthPoints is 0
+    private int energy = 100; // when energy drops to 0, healthPoints decreases
     private boolean isInjured = false;
     private boolean isAlive = true;
 
