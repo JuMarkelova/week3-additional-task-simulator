@@ -15,7 +15,7 @@ public class Events {
             if (randomNumber > 58 && randomNumber <= 69) sleep(octopus);
             if (randomNumber > 69 && randomNumber <= 80 && octopus.getIsInjured()) growTentacles(octopus);
             if (randomNumber > 80 && randomNumber <= 90) attackOctopusByHuman(octopus);
-            if (randomNumber > 90 && randomNumber <= 100) eatLobster(octopus);
+            if (randomNumber > 90 && randomNumber < 100) eatLobster(octopus);
             if (octopus.getEnergy() == 0) octopus.setHealthPoints(decreaseHealthPoints(octopus, 20));
             if (octopus.getHealthPoint() == 0) {
                 octopus.setIsAlive(false);
@@ -32,24 +32,21 @@ public class Events {
     }
 
     private static void giveBirthOctopus() {
-        String introduction = """
+        System.out.println("""
                 A baby octopus was born today.
                 It's a female. The life of an octopus is difficult and dangerous.
                 And it lasts no more than two years.
-                """;
-        System.out.println(introduction);
+                """);
     }
 
     private static void eatFish(Octopus octopus) {
         octopus.setEnergy(increaseEnergy(octopus, 5));
-        String message = "The octopus ate some fish! Her energy is restored.";
-        System.out.println(message);
+        System.out.println("The octopus ate some fish! Her energy is restored.");
     }
 
     private static void surroundOctopusBySparks(Octopus octopus) {
         octopus.setEnergy(decreaseEnergy(octopus, 40));
-        String message = "Cat sharks are swimming around. To survive, she needs to hide, which took so much energy.";
-        System.out.println(message);
+        System.out.println("Cat sharks are swimming around. To survive, she needs to hide, which took so much energy.");
         int randomNumber = createRandomNumber();
         if (randomNumber <= 50) {
             hidSuccessfully(octopus);
@@ -58,49 +55,42 @@ public class Events {
 
     private static void swim(Octopus octopus) {
         octopus.setEnergy(decreaseEnergy(octopus, 8));
-        String message = "What a great day, there are no dangers around, she can swim freely.";
-        System.out.println(message);
+        System.out.println("What a great day, there are no dangers around, she can swim freely.");
     }
 
     private static void sleep(Octopus octopus) {
         octopus.setEnergy(increaseEnergy(octopus, 10));
         octopus.setHealthPoints(increaseHealthPoints(octopus, 10));
-        String message = "She was able to sleep well and recharge.";
-        System.out.println(message);
+        System.out.println("She was able to sleep well and recharge.");
     }
 
     private static void hidSuccessfully(Octopus octopus) {
         octopus.setEnergy(increaseEnergy(octopus, 5));
-        String message = "The octopus successfully hid. She feels relieved.";
-        System.out.println(message);
+        System.out.println("The octopus successfully hid. She feels relieved.");
     }
 
     private static void hidUnsuccessfully(Octopus octopus) {
         octopus.setEnergy(decreaseEnergy(octopus, 10));
         octopus.setHealthPoints(decreaseHealthPoints(octopus, 25));
         octopus.setIsInjured(true);
-        String message = "The octopus couldn't hide. The shark found her and bit off one of her tentacles.";
-        System.out.println(message);
+        System.out.println("The octopus couldn't hide. The shark found her and bit off one of her tentacles.");
     }
 
     private static void attackOctopusByHuman(Octopus octopus) {
         octopus.setHealthPoints(decreaseHealthPoints(octopus, 25));
         octopus.setEnergy(decreaseEnergy(octopus, 10));
-        String message = "No! A human. If the octopus fails, she'll end up grilled.";
-        System.out.println(message);
+        System.out.println("No! A human. If the octopus fails, she'll end up grilled.");
     }
 
     private static void eatLobster(Octopus octopus) {
         octopus.setEnergy(increaseEnergy(octopus, 15));
-        String message = "Good fortune! She caught a lobster for lunch, which is a rare find!";
-        System.out.println(message);
+        System.out.println("Good fortune! She caught a lobster for lunch, which is a rare find!");
     }
 
     private static void growTentacles(Octopus octopus) {
         octopus.setHealthPoints(increaseHealthPoints(octopus, 5));
         octopus.setIsInjured(false);
-        String message = "New tentacles began to grow";
-        System.out.println(message);
+        System.out.println("New tentacles began to grow");
     }
 
     private static int decreaseEnergy(Octopus octopus, int energy) {
@@ -128,7 +118,6 @@ public class Events {
     }
 
     private static void printLastMessage() {
-        String message = "After living her short but eventful life, the octopus passed away.";
-        System.out.println(message);
+        System.out.println("After living her short but eventful life, the octopus passed away.");
     }
 }
